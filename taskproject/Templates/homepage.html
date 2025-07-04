@@ -1,0 +1,150 @@
+{% extends 'master.html' %}
+
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task Card</title>
+  <style>
+    
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 300px;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.5em;
+    }
+
+    .card p {
+      margin: 10px 0;
+      font-size: 0.95em;
+      color: #555;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+
+    .status {
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.9em;
+      display: inline-block;
+    }
+
+    .status.todo {
+      background-color: #ffe0e0;
+      color: #c00;
+    }
+
+    .status.in-progress {
+      background-color: #fff3cd;
+      color: #856404;
+    }
+
+    .status.done {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    .priority {
+      color: #ff9800;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+
+{% for i in data %}
+    
+
+    
+  <div class="card">
+    <h2>{{ i.title }}</h2>
+    <p><span class="label">Description:</span>{{ i.description }}</p>
+    <p><span class="label">Due Date:</span> {{ i.due_date }}</p>
+    <p><span class="label">Priority:</span> <span class="priority">High</span>{{ i.priority }}</p>
+    <p><span class="label">Status:</span>{{ i.status }} <span class="status in-progress"></span></p>
+  </div>
+
+{% endfor %}
+
+<h1>Inprogress-{{ inprogress.count  }}</h1>
+
+{% for i in inprogress %}
+    
+
+    
+  <div class="card">
+    <h2>{{ i.title }}</h2>
+    <p><span class="label">Description:</span>{{ i.description }}</p>
+    <p><span class="label">Due Date:</span> {{ i.due_date }}</p>
+    <p><span class="label">Priority:</span> <span class="priority">High</span>{{ i.priority }}</p>
+    <p><span class="label">Status:</span>{{ i.status }} <span class="status in-progress"></span></p>
+  </div>
+
+{% endfor %}
+
+<h1>pending-{{ pending.count  }}</h1>
+{% for i in pending %}
+    
+
+    
+  <div class="card">
+    <h2>{{ i.title }}</h2>
+    <p><span class="label">Description:</span>{{ i.description }}</p>
+    <p><span class="label">Due Date:</span> {{ i.due_date }}</p>
+    <p><span class="label">Priority:</span> <span class="priority">High</span>{{ i.priority }}</p>
+    <p><span class="label">Status:</span>{{ i.status }} <span class="status in-progress"></span></p>
+  </div>
+
+{% endfor %}
+<h1>completed-{{ completed.count  }}</h1>
+
+{% for i in completed %}
+    
+
+    
+  <div class="card">
+    <h2>{{ i.title }}</h2>
+    <p><span class="label">Description:</span>{{ i.description }}</p>
+    <p><span class="label">Due Date:</span> {{ i.due_date }}</p>
+    <p><span class="label">Priority:</span> <span class="priority">High</span>{{ i.priority }}</p>
+    <p><span class="label">Status:</span>{{ i.status }} <span class="status in-progress"></span></p>
+  </div>
+
+{% endfor %}
+
+{% comment %} {% for i in  %}
+     {% endcomment %}
+
+    
+  <div class="card">
+    
+    <p><span class="label">Total Task {{ data.count }}</span></p>
+    <p><span class="label">Completed:{{ inprogress.count }}</span></p>
+    <p><span class="label">Pending:{{ pending.count }}</span></p>
+    <p><span class="label">Inprogress:{{ inprogress.count }}</span></span></p>
+  </div>
+
+{% comment %} {% endfor %} {% endcomment %}
+</body>
+</html>
+
+
+{% endblock body %}

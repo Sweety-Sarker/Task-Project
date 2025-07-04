@@ -1,0 +1,104 @@
+{% extends 'master.html' %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Edit Page</h2>
+    <form method="POST">
+      {% csrf_token %}
+      <label for="title">Title</label>
+      <input type="text" id="title" value="{{ data.title }}" name="title" required />
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="4" required>{{ data.description }}</textarea>
+
+      <label for="due_date">Due Date</label>
+      <input type="date" id="due_date" value="{{ data.due_date|date:'Y-m-d' }}" name="due_date" required />
+
+      <label for="priority">Priority</label>
+      <select id="priority" {{ data.priority }}  name="priority" required>
+        <option value="">-- Select Priority --</option>
+        <option value="low" {% if data.priority == "low" %}selected{% endif %} >Low</option>
+        <option value="medium" 
+        {% if data.priority == "medium" %}selected{% endif %}>Medium</option>
+        <option value="high" {% if data.priority == "high" %}selected{% endif %}>High</option>
+      </select>
+
+      <label for="status">Status</label>
+      <select id="status" {{ data.status }} name="status" required>
+        <option value="">-- Select Status --</option>
+        <option value="pending" {% if data.status == "pending" %}selected{% endif %}>Pending</option>
+        <option value="inprogress" {% if data.status == "inprogress" %}selected{% endif %}>In Progress</option>
+        <option value="completed" {% if data.status == "completed" %}selected{% endif %}>Completed</option>
+      </select>
+
+      <button type="submit">Update</button>
+    </form>
+  </div>
+</body>
+</html>
+{% endblock body %}
